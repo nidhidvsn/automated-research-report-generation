@@ -15,7 +15,7 @@ class ReportService:
     def __init__(self):
         self.llm = ModelLoader().load_llm()
         self.reporter = AutonomousReportGenerator(self.llm)
-        self.reporter.memory = _shared_memory 
+        self.reporter.memory = _shared_memory   # Must initialize memory before building graph, else no analysts found error!
         self.graph = self.reporter.build_graph()
         self.logger = GLOBAL_LOGGER.bind(module="ReportService")
 

@@ -121,7 +121,7 @@ az container create \
   --azure-file-volume-share-name $FILE_SHARE \
   --azure-file-volume-mount-path /var/jenkins_home \
   --environment-variables \
-    JAVA_OPTS="-Djenkins.install.runSetupWizard=true"
+    JAVA_OPTS="-Djenkins.install.runSetupWizard=true" 
 
 # Wait for deployment
 echo "Waiting for Jenkins to deploy..."

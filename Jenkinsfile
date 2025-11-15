@@ -34,7 +34,7 @@ pipeline {
     stages {
         stage('Checkout') {
     steps {
-        echo 'Checking out code from Git...'
+        echo 'Checking out code from Git...' 
         // Clean workspace first
         deleteDir()
         // Clone the repository

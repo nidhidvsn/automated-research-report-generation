@@ -11,7 +11,7 @@ LOCATION="eastus"
 APP_ACR_NAME="researchreportacr$(date +%s | tail -c 7)"
 CONTAINER_ENV="research-report-env"
 # Generate unique storage account name (max 24 chars, lowercase, alphanumeric only)
-STORAGE_ACCOUNT="reportapp$(date +%s | tail -c 7)"
+STORAGE_ACCOUNT="reportapp$(date +%s | tail -c 7)" 
 FILE_SHARE="generated-reports"
 
 echo "╔════════════════════════════════════════════════════════╗"

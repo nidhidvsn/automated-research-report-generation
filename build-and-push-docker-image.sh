@@ -28,6 +28,6 @@ docker push ${APP_ACR_NAME}.azurecr.io/${IMAGE_NAME}:${TAG}
 
 echo ""
 echo "Build and push complete!"
-echo "Image: ${APP_ACR_NAME}.azurecr.io/${IMAGE_NAME}:${TAG}"
+echo "Image: ${APP_ACR_NAME}.azurecr.io/${IMAGE_NAME}:${TAG}" 
 echo ""
 echo "Now run your Jenkins pipeline to deploy."

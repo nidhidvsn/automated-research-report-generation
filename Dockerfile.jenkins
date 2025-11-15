@@ -6,7 +6,7 @@ FROM jenkins/jenkins:lts-jdk17
 # Switch to root to install packages
 USER root
 
-# Install Git, Python 3.11, Azure CLI, and Docker
+# Install Git, Python 3.11, Azure CLI, and Docker 
 RUN apt-get update && \
     apt-get install -y \
     git \

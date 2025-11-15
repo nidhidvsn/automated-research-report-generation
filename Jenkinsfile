@@ -70,6 +70,11 @@ pipeline {
                 sh '''
                     # Add your test commands here
                     # For now, just verify imports work
+
+                    # Ensure Python can see our app's module
+                    export PYTHONPATH=$PYTHONPATH:$WORKSPACE
+                    
+                    echo "Testing import..."
                     python3 -c "from research_and_analyst.api.main import app; print('✅ Imports successful')"
                 '''
             }

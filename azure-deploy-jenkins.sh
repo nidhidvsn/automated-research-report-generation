@@ -8,9 +8,9 @@ set -e
 # Configuration
 RESOURCE_GROUP="research-report-jenkins-rg"
 LOCATION="eastus"
-STORAGE_ACCOUNT="reportjenkinsstore"
+STORAGE_ACCOUNT_NAME="reportjenkins$(date +%s | tail -c 5)"
 FILE_SHARE="jenkins-data"
-ACR_NAME="reportjenkinsacr"
+ACR_NAME="reportjenkinsacr$(date +%s | tail -c 5)"
 CONTAINER_NAME="jenkins-research-report"
 DNS_NAME_LABEL="jenkins-research-$(date +%s | tail -c 6)"
 JENKINS_IMAGE_NAME="custom-jenkins"
@@ -26,24 +26,24 @@ echo "Creating Resource Group: $RESOURCE_GROUP..."
 az group create --name $RESOURCE_GROUP --location $LOCATION
 
 # Create Storage Account
-echo "Creating Storage Account: $STORAGE_ACCOUNT..."
+echo "Creating Storage Account: $STORAGE_ACCOUNT_NAME..."
 az storage account create \
   --resource-group $RESOURCE_GROUP \
-  --name $STORAGE_ACCOUNT \
+  --name $STORAGE_ACCOUNT_NAME \
   --location $LOCATION \
   --sku Standard_LRS
 
 # Get Storage Account Key
 STORAGE_KEY=$(az storage account keys list \
   --resource-group $RESOURCE_GROUP \
-  --account-name $STORAGE_ACCOUNT \
+  --account-name $STORAGE_ACCOUNT_NAME \
   --query '[0].value' -o tsv)
 
 # Create File Share
 echo "Creating File Share: $FILE_SHARE..."
 az storage share create \
   --name $FILE_SHARE \
-  --account-name $STORAGE_ACCOUNT \
+  --account-name $STORAGE_ACCOUNT_NAME \
   --account-key $STORAGE_KEY
 
 # Create Azure Container Registry
@@ -116,7 +116,7 @@ az container create \
   --ports 8080 \
   --cpu 2 \
   --memory 4 \
-  --azure-file-volume-account-name $STORAGE_ACCOUNT \
+  --azure-file-volume-account-name $STORAGE_ACCOUNT_NAME \
   --azure-file-volume-account-key $STORAGE_KEY \
   --azure-file-volume-share-name $FILE_SHARE \
   --azure-file-volume-mount-path /var/jenkins_home \
